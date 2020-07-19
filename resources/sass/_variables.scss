@@ -1,17 +1,22 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #e7e7e7;
 
 // Typography
-$font-family-sans-serif: 'Montserrat', 'Roboto', sans-serif;
+$font-family-montserrat: "Montserrat", sans-serif;
+$font-family-roboto: "Roboto", sans-serif;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
-$blue: #3490dc;
+$blue: #1c89c6;
+$white: #ffffff;
+$red: #be3600;
+
 $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66d9b;
-$red: #e3342f;
 $orange: #f6993f;
 $yellow: #ffed4a;
 $green: #38c172;
