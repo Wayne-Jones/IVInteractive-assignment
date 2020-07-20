@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import { Grid } from '@material-ui/core';
 const axios = require('axios');
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 const Form = () => {
     const inquiryOptions = ['Exchanges', 'Purchase Question', 'Billing', 'Quotes', 'Refunds'];
+    const [open, setOpen] = useState(false);
 
     const removeInvalidStatus = () => {
         let nameInput = document.getElementById("name");
@@ -22,6 +25,14 @@ const Form = () => {
         let phoneErr = document.getElementById("phoneErr");
         phoneErr.style.display = 'none';
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+    };
     const submitForm = (e) => {
         e.preventDefault();
         removeInvalidStatus();
@@ -44,6 +55,7 @@ const Form = () => {
             dateTime: dateTime
         })
         .then((res)=> {
+            setOpen(true);
             console.log(res.data);
         })
         .catch((err) => {
@@ -79,24 +91,24 @@ const Form = () => {
             <form onSubmit={(e) => submitForm(e)}>
                 <Grid container spacing={3}>
                     <Grid container item xs={12} spacing={3}>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} md={6}>
                             <label htmlFor="name">Name <span>*</span></label>
                             <input type="text" id="name" name="name" placeholder="Enter your name" aria-placeholder="Enter your name"></input>
-                            <span class="error" id="nameErr"></span>
+                            <span className="error" id="nameErr"></span>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} md={6}>
                             <label htmlFor="email">Email <span>*</span></label>
                             <input type="text" id="email" name="email" placeholder="Enter your email" aria-placeholder="Enter your email"></input>
-                            <span class="error" id="emailErr"></span>
+                            <span className="error" id="emailErr"></span>
                         </Grid>
                     </Grid>
                     <Grid container item xs={12} spacing={3}>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} md={6}>
                             <label htmlFor="phone">Phone <span>*</span></label>
                             <input type="text" id="phone" name="phone" placeholder="Enter your phone number" aria-placeholder="Enter your phone number"></input>
-                            <span class="error" id="phoneErr"></span>
+                            <span className="error" id="phoneErr"></span>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} md={6}>
                             <label htmlFor="inquiry">Subject of Inquiry</label>
                             <select id="inquiry" defaultValue="">
                                 <option value="" disabled>— Please select one —</option>
@@ -106,22 +118,29 @@ const Form = () => {
                             </select>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <label htmlFor="message">Your Message</label>
-                        <textarea id="message" name="message"></textarea>
+                    <Grid container item xs={12} spacing={3}>
+                        <Grid item xs={12}>
+                            <label htmlFor="message">Your Message</label>
+                            <textarea id="message" name="message"></textarea>
+                        </Grid>
                     </Grid>
-                    <Grid container item xs={12}>
-                        <Grid item xs={6}>
-                            <Grid item xs={5}>
+                    <Grid container item xs={12} spacing={3}>
+                        <Grid item xs={12} sm={4} md={4}>
+                            <Grid item xs={12} sm={8} md={6}>
                                 <button type="submit">SUBMIT</button>
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={8} md={8}>
                             <p><span>* Required Fields.</span> Please be aware that we cannot ensure that communications sent over the Internet are secure. This includes correspondence sent through this form or by email. If you are uncomfortable with such risks, you may contact us by phone instead of using this form.</p>
                         </Grid>
                     </Grid>
                 </Grid>
             </form>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity="success">
+                Form was successfully submitted.
+                </MuiAlert>
+            </Snackbar>
         </Grid>
     )
 }
