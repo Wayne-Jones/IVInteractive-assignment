@@ -83,6 +83,26 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
+.form input.invalid {
+  border: 1px solid #be3600;
+  color: #be3600;
+  background-color: #fff4f0;
+  border-bottom-right-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+}
+
+.form .error {
+  display: none;
+  color: #ffffff;
+  background-color: #be3600;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
 .form textarea {
   resize: none;
 }

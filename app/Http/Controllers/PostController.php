@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -56,6 +57,7 @@ class PostController extends Controller
         }
         $inquiry = $this->testInput($request->input('inquiry'));
         $message = $this->testInput($request->input('message'));
+        $dateTime = $this->testInput($request->input('dateTime'));
 
         if (!empty($emailErr) || !empty($phoneErr) || !empty($nameErr)) {
             $nameErr = !empty($nameErr) ? $nameErr : null;
@@ -66,7 +68,16 @@ class PostController extends Controller
                 ->json($jsonMessage, 400);
         }
 
-        return response()
-            ->json("Completed", 200);
+        $id = DB::table('form_responses')->insertGetId(
+            ['name' => $name, 'email' => $email, 'phone' => $phone, 'subject_inquiry' => $inquiry, 'message' => $message, 'date_inserted' => $dateTime]
+        );
+
+        if (empty($id)) {
+            return response()
+                ->json("Error inserting into the database", 500);
+        } else {
+            return response()
+                ->json("Completed", 200);
+        }
     }
 }
