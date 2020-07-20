@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 const axios = require('axios');
 
 
@@ -62,9 +62,14 @@ const Form = () => {
                         <label htmlFor="message">Your Message</label>
                         <textarea id="message" name="message"></textarea>
                     </Grid>
-                    <Grid container item xs={12} spacing={3}>
-                        <Grid item xs={2}>
-                            <button type="submit">SUBMIT</button>
+                    <Grid container item xs={12}>
+                        <Grid item xs={6}>
+                            <Grid item xs={5}>
+                                <button type="submit">SUBMIT</button>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <p><span>* Required Fields.</span> Please be aware that we cannot ensure that communications sent over the Internet are secure. This includes correspondence sent through this form or by email. If you are uncomfortable with such risks, you may contact us by phone instead of using this form.</p>
                         </Grid>
                     </Grid>
                 </Grid>
